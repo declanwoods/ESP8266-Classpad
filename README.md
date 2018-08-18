@@ -19,7 +19,7 @@ ESP8266-Classpad is a project that aims to allow two or more Casio Classpads to 
 To run the node.js game server:
 ```
 git clone https://github.com/spazhead/ESP8266-Classpad
-cd ESP8266-Classpad
+cd ESP8266-Classpad/examples/clientserver-node
 npm install
 node server.js
 ```
