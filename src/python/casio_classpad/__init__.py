@@ -1,0 +1,1 @@
+from casio_classpad import Classpad
