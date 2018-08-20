@@ -29,12 +29,11 @@ class Classpad(object):
 		output = ""
 		output += self.stringHeader
 
-		size = ((len(text)+2)+4) - ((len(text)+2)%4)
-		print size
+		size = ((len(text))+4) - ((len(text))%4)
 		output += (("0"*(4-len(str(chr(size))))) + hex(size+2)[2:]).upper()*2
 
 		paddingLength = size - len(text)
-		number = hex(size)[2:].upper()
+		number = hex(128-size*2)[2:].upper()
 		output += "057F%s3A" % number
 
 		data = ''.join([hex(ord(x))[2:] for x in text]).upper() + "00"*paddingLength
