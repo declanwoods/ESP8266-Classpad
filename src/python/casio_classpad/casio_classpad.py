@@ -8,7 +8,8 @@ class Classpad(object):
 		self.baudrate = 38400
 		self.bytesize = 7
 		self.serial = None
-		self.stringHeader = "3A4E446400010001"
+		self.noSerial = port==None
+		self.header = "3A4E446400010001"
 
 	def open(self, s=None):
 		if s == None:
@@ -20,14 +21,14 @@ class Classpad(object):
 			self.serial.close()
 
 	def writeString(self, text):
-		if not self.serial:
+		if not self.serial and not self.noSerial:
 			return False
 
 		if len(text) > 118:
 			return False
 
 		output = ""
-		output += self.stringHeader
+		output += self.header
 
 		size = ((len(text))+4) - ((len(text))%4)
 		output += (("0"*(4-len(str(chr(size))))) + hex(size+2)[2:]).upper()*2
@@ -47,6 +48,26 @@ class Classpad(object):
 		output += checksum
 
 		print output
-		self.serial.write(output)
+		if not self.noSerial:
+			self.serial.write(output)
 
-		return True
+		return output
+
+	def writeInteger(self, num):
+		if not self.serial:
+			return False
+
+		output = ""
+		output += self.header
+
+		length = len(hex(num)[2:])
+		print length
+
+	def writeFloat(self, num):
+		if not self.serial:
+			return False
+
+		output = ""
+		output += self.header
+
+		return output

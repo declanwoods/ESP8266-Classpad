@@ -38,12 +38,13 @@ Format:
 	String Length x2 - 2bytes:
 		has to suit 4n+2 where n>0
 	Middle:
-		05 7F {{78 - (bytelength-2) }} 3A
+		05 7F hex{{128 - (bytelength times 2)}} 3A
 	String data:
 		Starting in 00 01
 		Ascii data
 		Pad to length with 00
 	Ending byte:
-		CheckSum 8 bit , +80hex,128dec if paddingbytes <= 2
+		CheckSum 8 bit 2s comp, +80hex,128dec if paddingbytes <= 2
 
 
+3A4E446400010001000E000E057F683A00013132333435363738000000005B
