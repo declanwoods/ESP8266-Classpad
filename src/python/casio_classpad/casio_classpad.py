@@ -67,7 +67,13 @@ class Classpad(object):
 		if not self.serial: 
 			return False
 
+		if num == int(num):
+			return writeInteger(int(num))
+
 		output = ""
 		output += self.header
+
+		numberWhole = int(num//1.0)
+		decimal = num - numberWhole
 
 		return output
