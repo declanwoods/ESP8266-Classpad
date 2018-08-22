@@ -9,8 +9,7 @@ ESP8266-Classpad is a project that aims to allow two or more Casio Classpads to 
 | ------ | ------ |
 |Log and debug protocol between Classpads|🔥|
 |Basic connectivity between Classpads|❌|
-|Debug and map the 'Casio Protocol'|❌|
-|Create Python/NPM package for the 'Casio Protocol'|❌|
+|Create Python/NPM package for the 'Casio Protocol'|🔥|
 |Create working examples for peer-to-peer|❌|
 |Create a working demo game for client-server|❌|
 
