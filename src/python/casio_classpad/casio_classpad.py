@@ -60,11 +60,11 @@ class Classpad(object):
 		output = ""
 		output += self.header
 
-		length = len(hex(num)[2:])
+		length = len(hex(num)[2:])  
 		print length
 
 	def writeFloat(self, num):
-		if not self.serial:
+		if not self.serial: 
 			return False
 
 		output = ""
