@@ -76,4 +76,18 @@ class Classpad(object):
 		numberWhole = int(num//1.0)
 		decimal = num - numberWhole
 
-		return output
+		return output		print output
+		data = [ord(x) for x in binascii.unhexlify(output)]
+		if not self.noSerial:
+			self.serial.write(data)
+
+		return output if not self.returnData else data
+
+	def readString(self, serialData):
+		return False
+
+	def readInteger(self, serialData):
+		return False
+
+	def readFloat(self, serialData):
+		return False
