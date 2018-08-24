@@ -39,6 +39,15 @@ class Classpad {
 			return writeInteger(Math.floor(num));
 		}
 	}
+	readString(serialData) {
+
+	}
+	readInteger(serialData) {
+
+	}
+	readFloat(serialData) {
+		if (typeof serialData == "string")
+	}
 }
 
 module.exports = Classpad;
