@@ -2,6 +2,7 @@ import serial
 from math import ceil
 from functools import reduce
 import binascii
+from time import sleep
 
 class Classpad(object):
 	def __init__(self, port, returnData=False):
@@ -29,6 +30,16 @@ class Classpad(object):
 		self.serial.write([0x15])
 		return True
 
+	def waitForByte(self, byte):
+		response = None
+		while not response:
+			if self.serial.in_waiting:
+				readByte = self.serial.read(1)
+				print hex(ord(readByte))
+				if readByte == byte:
+					return True
+			sleep(0.005)
+
 	def generateChecksum(self, data, op=True):
 		checksum = ""
 		if len(data) > 0:
@@ -47,6 +58,10 @@ class Classpad(object):
 		if len(text) > 118:
 			return False
 
+
+		self.sendInitialByte()
+		self.waitForByte(0x16)
+
 		header = ""
 		header += self.genericHeader
 
@@ -61,6 +76,7 @@ class Classpad(object):
 		dataHeader = [ord(x) for x in binascii.unhexlify(header)]
 		if not self.noSerial:
 			self.serial.write(dataHeader)
+		self.waitForByte(0x06)
 
 		dataHex = "3A"
 		dataLength = ''.join([hex(ord(x))[2:] for x in text]).upper() + "00"*paddingLength
@@ -76,7 +92,7 @@ class Classpad(object):
 		dataBody = [ord(x) for x in binascii.unhexlify(dataHex)]
 		if not self.noSerial:
 			self.serial.write(dataBody)
-
+		self.waitForByte(0x06)
 		return [header, dataHex] if not self.returnData else [dataHeader, dataBody]
 
 	def writeInteger(self, num):
