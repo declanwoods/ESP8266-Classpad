@@ -14,7 +14,7 @@ IPAddress gateway(192,168,0,1);
 IPAddress mask(255,255,255,0);
 
 void setup() {
-    Serial.begin(9600);    
+    Serial.begin(38400, SERIAL_7N1);    
     WiFi.config(ip, gateway, mask);
     WiFi.mode(WIFI_STA);  
     WiFi.begin(ssid, password); // Connect to WIFI network
